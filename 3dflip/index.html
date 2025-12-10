@@ -23,15 +23,32 @@
   <body>
 
     <!-- Container fuer das PDF-Flipbook -->
-    <div class="flip-book-container solid-container" src="src/Paderno-mp.pdf"></div>
+    <div class="flip-book-container solid-container"></div>
 
-    <!-- JS-Libs (genau so, wie aus js/libs uebernommen) -->
+    <!-- JS-Libs -->
     <script src="js/jquery.min.js"></script>
     <script src="js/html2canvas.min.js"></script>
     <script src="js/three.min.js"></script>
     <script src="js/pdf.min.js"></script>
 
+    <!-- PDF.js Worker-Konfiguration (Pfad zum Worker) -->
+    <script type="text/javascript">
+      window.PDFJS_LOCALE = {
+        pdfJsWorker: 'js/pdf.worker.js'
+      };
+    </script>
+
     <!-- 3D FlipBook Hauptscript -->
     <script src="js/3dflipbook.min.js"></script>
+
+    <!-- FlipBook initialisieren -->
+    <script type="text/javascript">
+      // Warten, bis die Seite geladen ist
+      jQuery(function($) {
+        $('.flip-book-container').FlipBook({
+          pdf: 'src/Paderno-mp.pdf'
+        });
+      });
+    </script>
   </body>
 </html>
