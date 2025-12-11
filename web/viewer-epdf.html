@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>PDF Viewer – EmbedPDF</title>
+  <title>PDF Viewer – pdfjs-viewer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
@@ -10,30 +10,51 @@
       margin: 0;
       padding: 0;
       height: 100%;
-      overflow: hidden;
+      width: 100%;
       background: #111;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
-    #pdf-viewer {
+    .pdfjs-viewer {
       height: 100vh;
       width: 100vw;
     }
   </style>
+
+  <!-- pdf.js von CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>
+    const pdfjsLib = window['pdfjs-dist/build/pdf'];
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  </script>
+
+  <!-- jQuery (oder spaeter nojquery) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <!-- pdfjs-viewer CSS + JS von GitHub-CDN -->
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/dealfonso/pdfjs-viewer@2.0/dist/pdfjs-viewer.min.css">
+  <script src="https://cdn.jsdelivr.net/gh/dealfonso/pdfjs-viewer@2.0/dist/pdfjs-viewer.min.js"></script>
 </head>
 <body>
 
-  <div id="pdf-viewer"></div>
+  <!-- Container fuer den Viewer -->
+  <div id="viewer" class="pdfjs-viewer"></div>
 
-  <script type="module">
-    import EmbedPDF from 'https://snippet.embedpdf.com/embedpdf.js';
-
+  <script>
     // Dateiname aus ?file=... holen, sonst Standard
     const params = new URLSearchParams(window.location.search);
-    const src = params.get('file') || 'Paderno-Katalog.pdf'; // Default anpassen, falls nötig
+    const file = params.get('file') || 'Paderno-Katalog.pdf'; // hier dein Default-PDF anpassen
 
-    EmbedPDF.init({
-      type: 'container',
-      target: document.getElementById('pdf-viewer'),
-      src: src
+    // Viewer initialisieren
+    const pdfViewer = new PDFjsViewer($('#viewer'), {
+      zoomFillArea: 0.98,       // Seite fast voll
+      visibleThreshold: 0.6     // wann Seite als sichtbar gilt
+    });
+
+    pdfViewer.loadDocument(file).catch(err => {
+      console.error('Fehler beim Laden der PDF:', err);
+      alert('PDF konnte nicht geladen werden. Stimmt der Dateiname unter ?file= und liegt die Datei im Ordner "web"?');
     });
   </script>
 
