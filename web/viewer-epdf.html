@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Paderno Katalog – EmbedPDF Viewer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      background: #111;
+    }
+    #pdf-viewer {
+      height: 100vh;   /* Vollbild, auch auf Mobilgeraeten */
+      width: 100vw;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Container fuer EmbedPDF -->
+  <div id="pdf-viewer"></div>
+
+  <!-- EmbedPDF Snippet von CDN -->
+  <script async type="module">
+    import EmbedPDF from 'https://snippet.embedpdf.com/embedpdf.js';
+
+    const viewer = EmbedPDF.init({
+      type: 'container',
+      target: document.getElementById('pdf-viewer'),
+      // Dein PDF im gleichen Ordner wie diese Datei:
+      src: 'Paderno-Katalog.pdf'
+      // Wenn dein Dateiname anders ist, HIER anpassen
+      // z.B.: src: 'Paderno-mp.pdf'
+    });
+  </script>
+
+</body>
+</html>
