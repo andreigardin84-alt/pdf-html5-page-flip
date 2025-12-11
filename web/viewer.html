@@ -29,9 +29,7 @@ See https://github.com/adobe-type-tools/cmap-resources
 
 
     <link rel="stylesheet" href="viewer.css"/>
-<!-- magazine.css disabled
     <link rel="stylesheet" href="magazine.css" />
--->
 
   </head>
 
@@ -77,27 +75,16 @@ See https://github.com/adobe-type-tools/cmap-resources
               </button>
             </div>
           </div>
-
-          <div id="findbarOptionsOneContainer">
-            <input type="checkbox" id="findHighlightAll" class="toolbarField">
-            <label for="findHighlightAll" class="toolbarLabel" tabindex="94" data-l10n-id="find_highlight">Highlight all</label>
-            <input type="checkbox" id="findMatchCase" class="toolbarField">
-            <label for="findMatchCase" class="toolbarLabel" tabindex="95" data-l10n-id="find_match_case_label">Match case</label>
-          </div>
-          <div id="findbarOptionsTwoContainer">
-            <input type="checkbox" id="findEntireWord" class="toolbarField">
-            <label for="findEntireWord" class="toolbarLabel" tabindex="96" data-l10n-id="find_entire_word_label">Whole words</label>
-            <span id="findResultsCount" class="toolbarLabel hidden"></span>
-          </div>
-
-          <div id="findbarMessageContainer">
-            <span id="findMsg" class="toolbarLabel"></span>
-          </div>
+          <input type="checkbox" id="findHighlightAll" class="toolbarField">
+          <label for="findHighlightAll" class="toolbarLabel" tabindex="94" data-l10n-id="find_highlight">Highlight all</label>
+          <input type="checkbox" id="findMatchCase" class="toolbarField">
+          <label for="findMatchCase" class="toolbarLabel" tabindex="95" data-l10n-id="find_match_case_label">Match case</label>
+          <span id="findMsg" class="toolbarLabel"></span>
         </div>  <!-- findbar -->
 
         <div id="secondaryToolbar" class="secondaryToolbar hidden doorHangerRight">
           <div id="secondaryToolbarButtonContainer">
-            <button id="secondaryPresentationMode" class="secondaryToolbarButton presentationMode visibleLargeView"
+		  <button id="secondaryPresentationMode" class="secondaryToolbarButton presentationMode visibleLargeView"
                     title="Switch to Presentation Mode" tabindex="51" data-l10n-id="presentation_mode">
               <span data-l10n-id="presentation_mode_label">Presentation Mode</span>
             </button>
@@ -405,8 +392,8 @@ See https://github.com/adobe-type-tools/cmap-resources
   border-radius: 4px;
   background-color: #474747;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
-  color: #fff;
-  font-size: 16px;
+    color: #fff;
+    font-size: 16px;
 }
 #mozPrintCallback-shim .progress-row {
   clear: both;
@@ -447,6 +434,15 @@ See https://github.com/adobe-type-tools/cmap-resources
 <!-- turn.min.js, zoom.min.js, magazine.js -->
     <script src="l10n.js"></script>
     <script src="build/pdf.js"></script>
+    <script src="turnjs4/lib/turn.min.js"></script>
+    <script src="turnjs4/lib/zoom.min.js"></script>
+    <script src="debugger.js"></script>
     <script src="viewer.js"></script>
+    <script src="magazine.js"></script>
+      <script type="text/javascript">
+          $(document).ready(function () {
+              MagazineView.init();
+          });
+      </script>
   </body>
 </html>
